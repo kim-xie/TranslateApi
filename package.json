@@ -1,0 +1,23 @@
+{
+  "name": "translateapi",
+  "version": "1.0.0",
+  "description": "create by kim",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mr-kings/TranslateApi.git"
+  },
+  "keywords": [
+    "translate",
+    "api"
+  ],
+  "author": "kim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mr-kings/TranslateApi/issues"
+  },
+  "homepage": "https://github.com/mr-kings/TranslateApi#readme"
+}
