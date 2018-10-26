@@ -9,9 +9,13 @@ const https = require('https')
 const querystring = require('querystring')
 
 class HttpsClient {
-  constructor () {
-
-  },
+  constructor (method, requestInfo) {
+	 if(method === 'get'){
+	     return this.sendGet(requestInfo)
+	 }else{
+		 return this.sendPost(requestInfo)
+	 }
+  }
   sendGet (requestInfo) {
     // params
     const params = querystring.stringify(requestInfo.params)
@@ -24,6 +28,7 @@ class HttpsClient {
     return new Promise(function(resolve, reject) {
       https.request(options, function (res) {
         res.on('data', (data) => {
+		  console.log(data.toString())
           try {
               resolve(JSON.parse(data.toString()))
           } catch (e) {
@@ -42,7 +47,7 @@ class HttpsClient {
         reject(e)
       }).end()
     })
-  },
+  }
   sendPost (requestInfo) {
     // params
     let params
