@@ -7,16 +7,10 @@
 
 const https = require('https')
 const querystring = require('querystring')
+const fs = require('fs')
 
-class HttpsClient {
-  constructor (method, requestInfo) {
-	 if(method === 'get'){
-	     return this.sendGet(requestInfo)
-	 }else{
-		 return this.sendPost(requestInfo)
-	 }
-  }
-  sendGet (requestInfo) {
+const HttpsClient = {
+  sendGet: (requestInfo) => {
     // params
     const params = querystring.stringify(requestInfo.params)
     // options
@@ -28,7 +22,6 @@ class HttpsClient {
     return new Promise(function(resolve, reject) {
       https.request(options, function (res) {
         res.on('data', (data) => {
-		  console.log(data.toString())
           try {
               resolve(JSON.parse(data.toString()))
           } catch (e) {
@@ -47,8 +40,43 @@ class HttpsClient {
         reject(e)
       }).end()
     })
-  }
-  sendPost (requestInfo) {
+  },
+  getTextToAudio: (requestInfo) => {
+    // params
+    const params = querystring.stringify(requestInfo.params)
+    // options
+    const options = {
+        method: 'GET',
+        hostname: requestInfo.host,
+        path: requestInfo.path + "?" + params
+    }
+    return new Promise(function(resolve, reject) {
+      https.request(options, function (res) {
+        let chunks = []
+        res.on('data', (data) => {
+          chunks.push(data)
+          try {
+              resolve(JSON.parse(data.toString()))
+          } catch (e) {
+              // 无法解析json请求，就返回原始body
+              resolve(data.toString())
+          }
+        })
+        res.on('end', () => {
+          const mybuffer = Buffer.concat(chunks)
+          // fs模块写文件
+          fs.writeFileSync(requestInfo.ouputPath, mybuffer)
+        })
+        res.on('error', (e) => {
+          reject(e)
+        })
+      }).on('error', (e) => {
+        console.error(e.message)
+        reject(e)
+      }).end()
+    })
+  },
+  sendPost: (requestInfo) => {
     // params
     let params
     if(requestInfo.isJson){
@@ -56,7 +84,6 @@ class HttpsClient {
     } else {
       params = querystring.stringify(requestInfo.params)
     }
-
     // options
     const options = {
         method: 'POST',
@@ -69,7 +96,7 @@ class HttpsClient {
         }
     }
     return new Promise(function(resolve, reject) {
-      https.request(options, function (res) {
+      const request = https.request(options, function (res) {
         res.on('data', (data) => {
           try {
               resolve(JSON.parse(data.toString()))
@@ -84,10 +111,13 @@ class HttpsClient {
         res.on('error', (e) => {
           reject(e)
         })
-      }).on('error', (e) => {
+      })
+      request.on('error', (e) => {
         console.error(e.message)
         reject(e)
-      }).write(params).end()
+      })
+      request.write(params)
+      request.end()
     })
   }
 }

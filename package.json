@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/mr-kings/TranslateApi/issues"
   },
-  "homepage": "https://github.com/mr-kings/TranslateApi#readme"
+  "homepage": "https://github.com/mr-kings/TranslateApi#readme",
+  "devDependencies": {
+    "fluent-ffmpeg": "^2.1.2"
+  }
 }
