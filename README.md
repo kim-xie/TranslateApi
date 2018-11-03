@@ -21,14 +21,7 @@ const APP_KEY = "sZmjLHRI691Ge8kGIUtz"
 ```
 
 4、api接口测试
-<<<<<<< HEAD
 ```
 cd TranslateApi
 npm test
 ```
-=======
-
-cd TranslateApi
-
-npm test
->>>>>>> 0c63c494894e621301c5b971d745df0c132e8e70
