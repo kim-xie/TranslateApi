@@ -5,6 +5,7 @@
  * @author kim
  */
 
+const path = require('path')
 const https = require('https')
 const querystring = require('querystring')
 const fs = require('fs')
@@ -55,17 +56,16 @@ const HttpsClient = {
         let chunks = []
         res.on('data', (data) => {
           chunks.push(data)
-          try {
-              resolve(JSON.parse(data.toString()))
-          } catch (e) {
-              // 无法解析json请求，就返回原始body
-              resolve(data.toString())
-          }
         })
         res.on('end', () => {
           const mybuffer = Buffer.concat(chunks)
-          // fs模块写文件
-          fs.writeFileSync(requestInfo.ouputPath, mybuffer)
+          fs.writeFileSync(path.resolve(requestInfo.ouputPath), mybuffer)
+          try {
+              resolve(JSON.parse(mybuffer.toString()))
+          } catch (e) {
+              // 无法解析json请求，就返回原始body
+              resolve(mybuffer.toString())
+          }
         })
         res.on('error', (e) => {
           reject(e)

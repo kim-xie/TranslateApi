@@ -24,7 +24,8 @@ const APP_ID = "20180828000199769"
 
 const APP_KEY = "sZmjLHRI691Ge8kGIUtz"
 
-4、api 测试接口
+4、api接口测试
 
-node test.js
+cd TranslateApi
 
+npm test
