@@ -6,25 +6,29 @@
  */
 const crypto = require('crypto')
 const ffmpeg = require('fluent-ffmpeg')
+const path = require('path')
 
 const Util = {
   genMD5: (text) => {
     return crypto.createHash('md5').update(text).digest('hex')
   },
   formatConvert: (inputPath, outputPath) => {
+    let newinputPath = path.resolve(inputPath)
+    let newoutputPath = path.resolve(outputPath)
     return new Promise(function(resolve, reject) {
-      ffmpeg(inputPath)
+      ffmpeg(newinputPath)
       .audioCodec('pcm_s16le')
       .audioChannels(1)
       .audioBitrate('16k')
       .outputFormat('s16le')
+      .addOption('-y')
       .on('end', () => {
         console.log('文件转换成功!')
         resolve()
       }).on('error', (err) => {
         console.log('语音转换出现错误: ' + err.message)
         reject(err)
-      }).save(outputPath)
+      }).save(newoutputPath)
     })
   },
   merge: (source, dest) => {
@@ -54,11 +58,12 @@ const Util = {
       return '[object Function]' === Object.prototype.toString.call(obj);
   },
   getExt: (fileName) => {
-    return fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+    // return fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+    return path.extname(fileName)
   },
   isNotPcm: (fileName) => {
     const ext = Util.getExt(fileName)
-    return ext !== 'pcm'? true : false
+    return ext.indexOf('pcm') === -1 ? true : false
   }
 }
 
