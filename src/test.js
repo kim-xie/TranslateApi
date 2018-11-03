@@ -35,7 +35,7 @@ const Translator = require('./index.js')
  * jp  -- 日语
  * kor -- 韩语
  */
-// Translator.text2audio('zh', '我喜欢英语', './temp/tts.mp3').then((success) => {
+// Translator.text2audio('zh', '我喜欢英语', path.resolve('src/temp/tts.mp3')).then((success) => {
 // 	// 成功返回数据
 // 	console.log("text2audio: "+ JSON.stringify(success))
 // }).catch((error) => {
@@ -50,7 +50,7 @@ const Translator = require('./index.js')
  * yue -- 粤语
  * si  -- 四川话
  */
-// Translator.audio2text('./temp/tts.mp3','24.5d36b085f655168903771cd33eb20e68.2592000.1542984779.282335-11688323', 'zh').then((success) => {
+// Translator.audio2text(path.resolve('src/temp/tts.mp3'),'24.5d36b085f655168903771cd33eb20e68.2592000.1542984779.282335-11688323', 'zh').then((success) => {
 // 	// 成功返回数据
 // 	console.log("audio2Text: "+ JSON.stringify(success))
 // }).catch((error) => {
