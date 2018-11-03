@@ -1,3 +1,11 @@
+'use strict';
+/**
+ * Copyright (c) 2018 kimshareclub. All Rights Reserved
+ * Version 1.0.0
+ * @author kim
+ */
+
+const path = require('path')
 const Translator = require('./index.js')
 
 // 获取token
@@ -101,6 +109,8 @@ function audioTranslate(fileName, from, to){
 }
 
 // 先文本翻译拿到语音，再进行语音翻译
-textTranslate('en', 'zh', 'i like english too', './temp/tts.mp3').then((success) => {
-	audioTranslate('./temp/tts.mp3', 'zh', 'en')
+textTranslate('en', 'zh', 'i like english too', path.resolve('src/temp/tts.mp3')).then((success) => {
+	audioTranslate(path.resolve('src/temp/tts.mp3'), 'zh', 'en')
 })
+
+// textTranslate('zh', 'th', '哈喽', path.resolve('src/temp/tts.mp3'))

@@ -11,7 +11,7 @@ const httpsClient = require('./https/httpsClient.js')
 const util = require('./util/util.js')
 const TRANS_HOST = 'vop.baidu.com'
 const TRANS_PATH = '/server_api'
-const TEMP_PATH = './temp/16k.pcm'
+const TEMP_PATH = 'src/temp/16k.pcm'
 
 // 语音识别
 const AudioToText = {
