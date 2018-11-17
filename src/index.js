@@ -4,13 +4,13 @@ const text2audio = require('./text2audio.js')
 const audio2text = require('./audio2text.js')
 
 // token、tts、asr Api
-const USER_ID = "11688325"
-const API_KEY = "VKEOyyzOONs7NSnzhDnZdSjAw"
-const SECRET_KEY = "0hmY5jBAKGxpdC9TDf7d4FCeF811tVxsX"
+const USER_ID = "11688323"
+const API_KEY = "VKEOyyzOONs7NSnzhDnZdSjA"
+const SECRET_KEY = "0hmY5jBAKGxpdC9TDf7d4FCeF811tVsX"
 
 // fanyi Api
-const APP_ID = "20180828000199769"
-const APP_KEY = "sZmjLHRI691Ge8kGIUtz"
+const APP_ID = "20180828000199759"
+const APP_KEY = "sZmjLHRI691Ge6kGIUtz"
 
 /**
  * 翻译工具类
