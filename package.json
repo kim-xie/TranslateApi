@@ -4,7 +4,8 @@
   "description": "create by kim",
   "main": "index.js",
   "scripts": {
-    "test": "node ./src/test.js"
+    "test": "node ./src/test.js",
+    "start": "node ./src/main.js"
   },
   "repository": {
     "type": "git",
