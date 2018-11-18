@@ -28,7 +28,7 @@ http.createServer((req, res) => {
 			const to = objectData.to
 			const text = objectData.text
 			const fileName = objectData.fileName
-			textTranslate(from, to, text, fileName)
+			textTranslate(from, to, text, 'src/temp/tts.mp3')
 			.then(getAudio)
 			.then(result => {
 				//console.log(result);
