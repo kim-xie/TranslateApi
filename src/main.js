@@ -4,16 +4,18 @@
  * Version 1.0.0
  * @author kim
  */
-
+const express = require('express')
+const app = express()
 const url = require('url')
 const http = require('http')
+const https = require('https')
 const path = require('path')
 const querystring = require("querystring")
 const Translator = require('./index.js')
 
-// 创建http服务
-http.createServer((req, res) => {
-	// 设置接收数据编码格式为 UTF-8
+app.get("/translation", function (req, res, next) {
+  console.log('although this matches');
+  // 设置接收数据编码格式为 UTF-8
   req.setEncoding('utf-8')
   let postData = ""
   // 数据块接收中
@@ -47,8 +49,17 @@ http.createServer((req, res) => {
 				res.end()
 			})
   })
-}).listen('8888', "localhost", function(){
-    console.log("HTTP服务器启动中，监听端口：8888......")
+})
+
+// 创建http服务
+// http.createServer(app).listen('8888', "localhost", function(){
+//     console.log("HTTP服务器启动中，监听端口：8888......")
+// })
+
+var server = app.listen(8888, function () {
+  var host = server.address().address
+  var port = server.address().port
+  console.log("应用实例，访问地址为 http://%s:%s", host, port)
 })
 
 

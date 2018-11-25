@@ -22,6 +22,10 @@
   },
   "homepage": "https://github.com/mr-kings/TranslateApi#readme",
   "devDependencies": {
-    "fluent-ffmpeg": "^2.1.2"
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "fluent-ffmpeg": "^2.1.2",
+    "multer": "^1.4.1"
   }
 }
